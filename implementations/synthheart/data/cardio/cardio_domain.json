@@ -1,0 +1,38 @@
+{
+  "age": {
+    "type": "continuous"
+  },
+  "height": {
+    "type": "continuous"
+  },
+  "weight": {
+    "type": "continuous"
+  },
+  "ap_hi": {
+    "type": "continuous"
+  },
+  "ap_lo": {
+    "type": "continuous"
+  },
+  "gender": {
+    "type": "discrete"
+  },
+  "cholesterol": {
+    "type": "discrete"
+  },
+  "gluc": {
+    "type": "discrete"
+  },
+  "smoke": {
+    "type": "discrete"
+  },
+  "alco": {
+    "type": "discrete"
+  },
+  "active": {
+    "type": "discrete"
+  },
+  "cardio": {
+    "type": "discrete"
+  }
+}

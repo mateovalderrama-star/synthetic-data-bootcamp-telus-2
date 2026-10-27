@@ -1,0 +1,6 @@
+# Large or regenerable outputs: never commit
+runs/
+logs/
+*.executed.ipynb
+# Prepared splits are recreated by notebook 01 (CSVs are already ignored repo-wide)
+data/cardio/*.csv

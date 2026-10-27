@@ -1,0 +1,31 @@
+{
+  "rows_raw": 70000,
+  "rows_clean": 68559,
+  "split_rows": {
+    "train": 41135,
+    "holdout": 13712,
+    "test": 13712
+  },
+  "rules_failed": {
+    "height outside 130-210": 93,
+    "weight outside 35-200": 20,
+    "ap_hi outside 80-250": 247,
+    "ap_lo outside 40-160": 1025,
+    "ap_hi <= ap_lo": 1236
+  },
+  "trtr_baseline": {
+    "xgboost": {
+      "test_auc": 0.8014,
+      "test_accuracy": 0.7381,
+      "cv_auc_mean": 0.8001,
+      "cv_auc_std": 0.0058
+    },
+    "logreg": {
+      "test_auc": 0.7913,
+      "test_accuracy": 0.7277,
+      "cv_auc_mean": 0.7909,
+      "cv_auc_std": 0.0056
+    }
+  },
+  "acceptance_target": "synthetic-trained (TSTR) AUC within 0.02 of the xgboost TRTR test AUC"
+}
