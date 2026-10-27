@@ -16,9 +16,9 @@
   "trtr_baseline": {
     "xgboost": {
       "test_auc": 0.8014,
-      "test_accuracy": 0.7381,
-      "cv_auc_mean": 0.8001,
-      "cv_auc_std": 0.0058
+      "test_accuracy": 0.7366,
+      "cv_auc_mean": 0.8002,
+      "cv_auc_std": 0.0056
     },
     "logreg": {
       "test_auc": 0.7913,
