@@ -20,17 +20,27 @@ uv sync --dev --group tabular-data     # installs midst-toolkit, torch, xgboost,
 
 ## Running the long TabDDPM job (notebook 02)
 
-1. Open the notebook and run it with `RUN_MODE = "smoke"` first, to confirm the environment works.
-2. Set `RUN_MODE = "full"`, save, and launch it in the background so it survives a closed browser tab:
+The run mode is chosen **when you launch**, so you never edit the notebook. It defaults to `smoke`.
 
+1. Smoke test first (minutes):
 ```bash
 cd implementations/synthheart
 mkdir -p logs
-nohup uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.ipynb \
+uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.ipynb \
+      --output 02_smoke.executed.ipynb --ExecutePreprocessor.timeout=-1
+```
+2. Full run, in the background so it survives a closed browser tab:
+```bash
+SYNTHHEART_RUN_MODE=full nohup uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.ipynb \
       --output 02_train_tabddpm_and_generate.executed.ipynb \
       --ExecutePreprocessor.timeout=-1 > logs/02_full_run.log 2>&1 &
-tail -f logs/02_full_run.log
 ```
+3. Watch progress (bar, step count, ETA, loss):
+```bash
+uv run python progress.py --watch          # refreshes every 20 s; Ctrl+C stops watching, not training
+uv run python progress.py                  # one snapshot
+```
+`progress.py` reads `logs/02_<mode>_progress.log`. Training updates every 500 steps. Sampling has no step updates, so it shows elapsed time instead. If something crashes, the error is in `logs/02_full_run.log`.
 
 ## Data split (fixed seed 42)
 

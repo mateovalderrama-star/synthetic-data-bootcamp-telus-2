@@ -57,6 +57,37 @@ DATA_DIR = PROJECT / "data" / TABLE  # prepared splits + metadata (CSVs are git-
 RESULTS_DIR = PROJECT / "results"
 
 
+LOGS_DIR = PROJECT / "logs"
+
+
+def start_progress_log(run_mode: str, total_steps: int, sample_scales: list[float]):
+    """Mirror midst-toolkit's log lines (e.g. "Step 500/20000 ...") plus our own milestones into a
+    timestamped file, so `progress.py` can show a live progress bar even when the notebook runs headless.
+
+    Returns a `stage(msg)` function for writing milestone lines.
+    """
+    import logging
+
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    path = LOGS_DIR / f"02_{run_mode}_progress.log"
+    handler = logging.FileHandler(path, mode="w", encoding="utf-8")
+    handler.setFormatter(logging.Formatter("%(asctime)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
+    toolkit = logging.getLogger("midst_toolkit")
+    for h in list(toolkit.handlers):  # avoid duplicate file handlers if the cell is re-run
+        if isinstance(h, logging.FileHandler) and Path(h.baseFilename).name == path.name:
+            toolkit.removeHandler(h)
+    toolkit.addHandler(handler)
+
+    def stage(msg: str) -> None:
+        handler.emit(logging.LogRecord("synthheart", logging.INFO, "", 0, f"STAGE {msg}", None, None))
+        handler.flush()
+
+    scales = ",".join(f"{s:g}" for s in sample_scales)
+    stage(f"RUN_START mode={run_mode} total_steps={total_steps} scales={scales}")
+    print(f"progress log -> {path}  (watch with: uv run python progress.py --mode {run_mode} --watch)")
+    return stage
+
+
 def load_raw() -> pd.DataFrame:
     """Load the Kaggle file exactly as downloaded."""
     return pd.read_csv(RAW_CSV, sep=";")
