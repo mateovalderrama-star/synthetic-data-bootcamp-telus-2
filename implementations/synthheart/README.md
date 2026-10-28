@@ -39,6 +39,7 @@ uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.i
 ```bash
 SYNTHHEART_RUN_MODE=full nohup uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.ipynb \
       --output 02_train_tabddpm_and_generate.executed.ipynb \
+      --ExecutePreprocessor.kernel_name=synthheart \
       --ExecutePreprocessor.timeout=-1 > logs/02_full_run.log 2>&1 &
 ```
 3. Watch progress (bar, step count, ETA, loss):
