@@ -4,3 +4,5 @@ logs/
 *.executed.ipynb
 # Prepared splits are recreated by notebook 01 (CSVs are already ignored repo-wide)
 data/cardio/*.csv
+# Written by SynthEval (via midst-toolkit) when notebook 03 runs
+SE_analysis_config.json
