@@ -7,7 +7,7 @@ Privacy-safe synthetic patient data for cardiovascular risk prediction. We train
 | # | Notebook | Where | Time | Produces |
 |---|---|---|---|---|
 | 01 | `01_data_prep_and_baseline.ipynb` | anywhere (CPU) | ~1 min | `data/cardio/` splits + metadata, `results/baseline_metrics.json` |
-| 02 | `02_train_tabddpm_and_generate.ipynb` | **AI Factory GPU** | smoke: minutes · full: **~4–5 h** | `runs/<mode>/` model + synthetic CSVs, `results/02_generation_summary_<mode>.json` |
+| 02 | `02_train_tabddpm_and_generate.ipynb` | **AI Factory GPU** | smoke: minutes · full: **~15–30 min on an H200** | `runs/<mode>/` model + synthetic CSVs, `results/02_generation_summary_<mode>.json` |
 | 03 | scorecard (next) | GPU or CPU | – | fidelity · utility · privacy |
 
 All notebooks share `synthheart_common.py`: column order, cleaning/filter rules and paths.
@@ -22,12 +22,18 @@ uv sync --dev --group tabular-data     # installs midst-toolkit, torch, xgboost,
 
 The run mode is chosen **when you launch**, so you never edit the notebook. It defaults to `smoke`.
 
+**One-time kernel setup (important).** On the AI Factory, the default `python3` Jupyter kernel is the system conda Python, which does **not** have midst-toolkit (you'd get `ModuleNotFoundError: No module named 'midst_toolkit'`). Register the repo environment as a kernel once:
+```bash
+uv run python -m ipykernel install --user --name synthheart --display-name "SynthHeart (.venv)"
+```
+Always pass `--ExecutePreprocessor.kernel_name=synthheart` to nbconvert, and pick **SynthHeart (.venv)** as the kernel when running notebooks in JupyterLab.
+
 1. Smoke test first (minutes):
 ```bash
 cd implementations/synthheart
 mkdir -p logs
 uv run jupyter nbconvert --to notebook --execute 02_train_tabddpm_and_generate.ipynb \
-      --output 02_smoke.executed.ipynb --ExecutePreprocessor.timeout=-1
+      --output 02_smoke.executed.ipynb --ExecutePreprocessor.kernel_name=synthheart --ExecutePreprocessor.timeout=-1
 ```
 2. Full run, in the background so it survives a closed browser tab:
 ```bash
