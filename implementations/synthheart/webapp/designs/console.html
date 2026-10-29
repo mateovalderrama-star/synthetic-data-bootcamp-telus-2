@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SynthHeart Clinical Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234B286D'/%3E%3Cpath d='M5 17h6l2-5 3 9 2.5-6 1.5 2h7' fill='none' stroke='%2366CC00' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>/*__BASE_CSS__*/</style>
+<style>
+:root {
+  --font: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --bg: #f4f2f7; --surface: #ffffff; --surface-2: #f4f1f7; --field: #ffffff; --border: #e4dfea; --border-2: #cfc6d9;
+  --text: #2a2c2e; --text-2: #3b3d40; --muted: #6b6f75; --brand: #4b286d; --brand-d: #3d115c; --accent: #66cc00; --on-brand: #fff;
+  --real: #4b286d; --synth: #66cc00; --heat: #4b286d; --good: #2b8000; --warn: #b8650a; --bad: #c12335;
+  --low-bg: #eaf6df; --mid-bg: #fdf1df; --high-bg: #fbe6e9; --ring: rgba(75, 40, 109, .18);
+  --side-1: #3d115c; --side-2: #2b0b43; --side-text: #e6dcef; --side-muted: #a991c0;
+  --radius: 12px; --r-sm: 8px; --shadow: 0 1px 2px rgba(42, 20, 66, .05), 0 2px 8px rgba(42, 20, 66, .04);
+  --seg-on: #4b286d;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141118; --surface: #1d1922; --surface-2: #26212d; --field: #1a161f; --border: #332c3c; --border-2: #4a4156;
+  --text: #ece8f1; --text-2: #dcd6e4; --muted: #a39cad; --brand: #b597d6; --brand-d: #c9b0e6; --accent: #7fd63a; --on-brand: #1b1324;
+  --real: #b597d6; --synth: #7fd63a; --heat: #9a6fc6; --good: #7fd63a; --warn: #f2ac52; --bad: #ff7d8a;
+  --low-bg: #1f2e15; --mid-bg: #382912; --high-bg: #3c1a21; --ring: rgba(181, 151, 214, .25);
+  --side-1: #1a1022; --side-2: #120b18; --shadow: none; --seg-on: #b597d6; --seg-on-text: #1b1324;
+} }
+:root[data-theme="dark"] {
+  --bg: #141118; --surface: #1d1922; --surface-2: #26212d; --field: #1a161f; --border: #332c3c; --border-2: #4a4156;
+  --text: #ece8f1; --text-2: #dcd6e4; --muted: #a39cad; --brand: #b597d6; --brand-d: #c9b0e6; --accent: #7fd63a; --on-brand: #1b1324;
+  --real: #b597d6; --synth: #7fd63a; --heat: #9a6fc6; --good: #7fd63a; --warn: #f2ac52; --bad: #ff7d8a;
+  --low-bg: #1f2e15; --mid-bg: #382912; --high-bg: #3c1a21; --ring: rgba(181, 151, 214, .25);
+  --side-1: #1a1022; --side-2: #120b18; --shadow: none; --seg-on: #b597d6; --seg-on-text: #1b1324;
+}
+body { font-size: 14px; }
+.app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
+
+/* sidebar */
+.side { background: linear-gradient(180deg, var(--side-1), var(--side-2)); color: var(--side-text); display: flex; flex-direction: column; padding: 18px 14px; position: sticky; top: 0; height: 100vh; }
+.brand { display: flex; align-items: center; gap: 11px; padding: 4px 8px 22px; }
+.brand-mark { width: 36px; height: 36px; border-radius: 10px; background: rgba(255, 255, 255, .1); display: grid; place-items: center; flex: none; }
+.brand-mark svg { width: 22px; height: 22px; }
+.brand-mark path { stroke-dasharray: 60; animation: trace 2.4s ease-in-out infinite; }
+@keyframes trace { 0% { stroke-dashoffset: 60; } 55%, 100% { stroke-dashoffset: 0; } }
+.brand b { display: block; font-size: 16px; color: #fff; letter-spacing: -.01em; }
+.brand span { font-size: 11.5px; color: var(--side-muted); }
+.nav-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--side-muted); padding: 0 10px; margin: 6px 0 6px; }
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav button { display: flex; align-items: center; gap: 11px; width: 100%; border: 0; background: transparent; color: var(--side-text); padding: 10px 10px; border-radius: 9px;
+  font-size: 13.5px; font-weight: 500; cursor: pointer; text-align: left; position: relative; transition: background .2s, color .2s; }
+.nav button:hover { background: rgba(255, 255, 255, .07); }
+.nav button.active { background: rgba(255, 255, 255, .13); color: #fff; font-weight: 600; }
+.nav button.active::before { content: ""; position: absolute; left: -14px; top: 8px; bottom: 8px; width: 4px; border-radius: 0 4px 4px 0; background: var(--accent); }
+.nav .ico { width: 18px; height: 18px; opacity: .9; }
+.nav .count { margin-left: auto; background: var(--accent); color: #1c2a0d; font-size: 11px; font-weight: 800; border-radius: 99px; padding: 1px 7px; }
+.nav .count:empty { display: none; }
+.side-foot { margin-top: auto; display: grid; gap: 10px; }
+.side-card { background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .08); border-radius: 12px; padding: 12px; font-size: 12px; color: var(--side-muted); }
+.side-card b { color: #fff; display: block; font-size: 12.5px; margin-bottom: 2px; }
+.live { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 6px; box-shadow: 0 0 0 0 rgba(102, 204, 0, .6); animation: pulse-ring 1.8s infinite; }
+.side-card.warn b { color: #ffd59a; }
+
+/* topbar */
+.main { min-width: 0; display: flex; flex-direction: column; }
+.topbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 14px; padding: 12px 28px; background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+.crumbs { font-size: 13px; color: var(--muted); } .crumbs b { color: var(--text); font-weight: 600; }
+.top-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; padding: 6px 11px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); }
+.top-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; }
+.top-btn:hover { border-color: var(--brand); }
+.avatar { display: flex; align-items: center; gap: 9px; font-size: 12.5px; }
+.avatar i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--brand); color: var(--on-brand); font-style: normal; font-weight: 700; font-size: 12px; }
+.avatar span { line-height: 1.2; } .avatar small { display: block; color: var(--muted); font-size: 11px; }
+@media (max-width: 1100px) { .avatar span, .status { display: none; } }
+
+.content { padding: 24px 28px 48px; max-width: 1320px; width: 100%; }
+.panel { display: grid; gap: 18px; }
+.panel-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.panel-head h2 { font-size: 22px; margin-top: 2px; }
+.lead { margin: 4px 0 0; color: var(--muted); max-width: 680px; }
+.grid { display: grid; gap: 18px; } .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid.tight { gap: 14px; }
+@media (max-width: 1080px) { .g3 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .g2 { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); min-width: 0; }
+.card-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.card-sub { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+.tag { font-size: 12px; color: var(--muted); background: var(--surface-2); padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.tag b { color: var(--text); }
+.chart-card { padding: 18px 18px 12px; }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1080px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+.step { background: var(--surface); border: 1px solid var(--border); }
+.sc-hero { display: flex; align-items: center; gap: 12px; }
+.sc-ring { --p: 0; width: 86px; height: 86px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(closest-side, var(--surface) 78%, transparent 80% 100%), conic-gradient(var(--good) calc(var(--p) * 360deg), var(--surface-2) 0); transition: --p 1s; }
+.sc-count { font-size: 24px; font-weight: 800; letter-spacing: -.02em; } .sc-count small { font-size: 14px; color: var(--muted); font-weight: 600; }
+
+/* assessment */
+.assess { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr); gap: 18px; align-items: start; }
+@media (max-width: 1080px) { .assess { grid-template-columns: minmax(0, 1fr); } }
+.form-card { padding: 0; overflow: hidden; }
+.form-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.progress { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.progress-bar { width: 120px; height: 6px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.progress-bar i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--brand), var(--accent)); border-radius: 99px; transition: width .4s; }
+.fsec { padding: 16px 20px 4px; border-bottom: 1px solid var(--border); }
+.fsec:last-of-type { border-bottom: 0; }
+.fsec-h { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+.fsec-h .ico { color: var(--brand); width: 17px; height: 17px; }
+.fsec-h h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); }
+.fgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px; }
+.fgrid .wide { grid-column: 1 / -1; }
+@media (max-width: 560px) { .fgrid { grid-template-columns: minmax(0, 1fr); } }
+.bmi-pill { display: flex; align-items: center; justify-content: space-between; background: var(--surface-2); border-radius: var(--r-sm); padding: 10px 12px; font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
+.bmi-pill b { font-size: 16px; color: var(--text); }
+.form-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 20px; background: var(--surface-2); flex-wrap: wrap; }
+.result-card { position: sticky; top: 76px; }
+.result-card .card-h { margin-bottom: 14px; }
+.examples { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* mobile: sidebar becomes a top bar */
+@media (max-width: 860px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .side { position: static; height: auto; padding: 12px 16px; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .brand { padding: 0; flex: 1; } .nav-label, .side-foot { display: none; }
+  .nav { flex-direction: row; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .nav button { white-space: nowrap; width: auto; } .nav button.active::before { display: none; }
+  .topbar { padding: 10px 16px; } .content { padding: 18px 16px 40px; }
+  .result-card { position: static; }
+}
+</style>
+</head>
+<body>
+<div id="test-banner" class="test-banner" hidden>TEST MODEL · development stand-in, not the synthetic-trained model · do not demo</div>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#7fd63a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h4.5l2-5 3.5 10 2.5-6.5 1.5 1.5H22"/></svg></div>
+      <div><b>SynthHeart</b><span>Cardiac Risk Workspace</span></div>
+    </div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav" role="tablist">
+      <button data-tab="check" role="tab"><svg class="ico" viewBox="0 0 24 24"><path d="M9 4h6M9 4a2 2 0 0 0-2 2v0H5v15h14V6h-2a2 2 0 0 0-2-2M9 12l2 2 4-4"/></svg>Assessment<span class="count" id="worklist-count"></span></button>
+      <button data-tab="compare" role="tab"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Population evidence</button>
+      <button data-tab="scorecard" role="tab"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Model trust<span class="count" id="sc-mini" style="background:rgba(255,255,255,.16);color:#fff"></span></button>
+      <button data-tab="about" role="tab"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>Method &amp; limits</button>
+    </nav>
+    <div class="side-foot">
+      <div class="side-card"><b><span class="live"></span>Model online</b>Synthetic-trained XGBoost · <span id="model-chip-auc"></span><br>Runs on this device</div>
+      <div class="side-card warn"><b>Demo environment</b>Not for clinical use. Do not enter names or identifiers.</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumbs">Workspace / <b id="crumb">New assessment</b></div>
+      <div class="top-right">
+        <span class="status"><span class="live"></span>Local inference · no data leaves this device</span>
+        <button class="top-btn" id="theme-btn" type="button" aria-label="Toggle dark mode"><svg class="ico" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+        <div class="avatar"><i>RN</i><span>Nurse view<small>Cardiology clinic</small></span></div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section data-panel="check" class="panel">
+        <div class="panel-head">
+          <div><span class="eyebrow">Assessment</span><h2>Cardiovascular risk assessment</h2><p class="lead">Record the patient's measurements. The estimate updates as you type.</p></div>
+          <div class="examples" id="examples"></div>
+        </div>
+        <div class="assess">
+          <div class="card form-card">
+            <div class="form-head"><h3>Patient measurements</h3><div class="progress"><span id="progress-text">0 of 11 fields</span><span class="progress-bar" data-progress><i></i></span></div></div>
+            <form id="form" autocomplete="off" onsubmit="return false">
+              <div class="fsec"><div class="fsec-h"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><h3>Demographics</h3></div>
+                <div class="fgrid">
+                  <div class="field"><label for="age">Age</label><div class="inp"><input id="age" type="number" inputmode="decimal" step="1" placeholder="e.g. 55"><span class="unit">years</span></div><div class="hint" id="h-age"></div></div>
+                  <div class="field"><span class="lbl">Sex</span><div class="seg" data-name="gender"><button type="button" data-v="0">Female</button><button type="button" data-v="1">Male</button></div><div class="hint"></div></div>
+                </div></div>
+              <div class="fsec"><div class="fsec-h"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9a4 4 0 0 1 6 0l-3 3"/></svg><h3>Body measurements</h3></div>
+                <div class="fgrid">
+                  <div class="field"><label for="height">Height</label><div class="inp"><input id="height" type="number" inputmode="decimal" step="1" placeholder="e.g. 170"><span class="unit">cm</span></div><div class="hint" id="h-height"></div></div>
+                  <div class="field"><label for="weight">Weight</label><div class="inp"><input id="weight" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 78"><span class="unit">kg</span></div><div class="hint" id="h-weight"></div></div>
+                  <div class="wide bmi-pill"><span>Body-mass index (calculated)</span><b id="bmi-out">–</b></div>
+                </div></div>
+              <div class="fsec"><div class="fsec-h"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg><h3>Vitals</h3></div>
+                <div class="fgrid">
+                  <div class="field"><label for="ap_hi">Systolic BP</label><div class="inp"><input id="ap_hi" type="number" inputmode="numeric" step="1" placeholder="e.g. 120"><span class="unit">mmHg</span></div><div class="hint" id="h-ap_hi"></div></div>
+                  <div class="field"><label for="ap_lo">Diastolic BP</label><div class="inp"><input id="ap_lo" type="number" inputmode="numeric" step="1" placeholder="e.g. 80"><span class="unit">mmHg</span></div><div class="hint" id="h-ap_lo"></div></div>
+                </div></div>
+              <div class="fsec"><div class="fsec-h"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L5 19a1.5 1.5 0 0 0 1.3 2h11.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/></svg><h3>Labs</h3></div>
+                <div class="fgrid">
+                  <div class="field wide"><span class="lbl">Cholesterol</span><div class="seg" data-name="cholesterol"><button type="button" data-v="0">Normal</button><button type="button" data-v="1">Above normal</button><button type="button" data-v="2">Well above</button></div><div class="hint"></div></div>
+                  <div class="field wide"><span class="lbl">Glucose</span><div class="seg" data-name="gluc"><button type="button" data-v="0">Normal</button><button type="button" data-v="1">Above normal</button><button type="button" data-v="2">Well above</button></div><div class="hint"></div></div>
+                </div></div>
+              <div class="fsec"><div class="fsec-h"><svg class="ico" viewBox="0 0 24 24"><circle cx="14" cy="4.5" r="2"/><path d="M8 21l3-6 3 2v4M6 12l3-3 4 1 3 3 3 1"/></svg><h3>Lifestyle</h3></div>
+                <div class="fgrid">
+                  <div class="field"><span class="lbl">Smokes</span><div class="seg" data-name="smoke"><button type="button" data-v="0">No</button><button type="button" data-v="1">Yes</button></div><div class="hint"></div></div>
+                  <div class="field"><span class="lbl">Drinks alcohol</span><div class="seg" data-name="alco"><button type="button" data-v="0">No</button><button type="button" data-v="1">Yes</button></div><div class="hint"></div></div>
+                  <div class="field"><span class="lbl">Physically active</span><div class="seg" data-name="active"><button type="button" data-v="0">No</button><button type="button" data-v="1">Yes</button></div><div class="hint"></div></div>
+                </div></div>
+            </form>
+            <div class="form-foot"><span class="muted-sm">Ranges follow the medical-sense rules used to clean the training data.</span><button class="btn ghost" type="button" id="reset-btn">Clear form</button></div>
+          </div>
+
+          <div class="card result-card">
+            <div class="card-h"><h3>Risk estimate</h3><span class="tag">11 inputs · updates live</span></div>
+            <div id="result-body" data-gauge="arc"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Today's worklist</h3><span class="tag">this tab only</span></div>
+          <p class="card-sub">Use initials or a code, never a name. The list is cleared when this tab closes.</p>
+          <div id="session"></div>
+        </div>
+      </section>
+<!--__PANELS__-->
+    </main>
+  </div>
+</div>
+<script>/*__PREDICTOR__*/</script>
+<script>/*__DATA__*/</script>
+<script>/*__APP__*/</script>
+<script>
+document.addEventListener("synthheart:tab", (e) => {
+  document.getElementById("crumb").textContent = { check: "New assessment", compare: "Population evidence", scorecard: "Model trust", about: "Method & limits" }[e.detail];
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+</body>
+</html>
