@@ -1,0 +1,59 @@
+{
+  "run_mode": "iter5000",
+  "device": "cuda",
+  "gpu": "NVIDIA H200",
+  "diffusion_config": {
+    "d_layers": [
+      512,
+      1024,
+      1024,
+      1024,
+      1024,
+      512
+    ],
+    "dropout": 0.0,
+    "model_type": "mlp",
+    "lr": 0.0006,
+    "gaussian_loss_type": "mse",
+    "weight_decay": 1e-05,
+    "scheduler": "cosine",
+    "data_split_ratios": [
+      0.99,
+      0.005,
+      0.005
+    ],
+    "merge_categoricals_into_numerical": false,
+    "iterations": 5000,
+    "num_timesteps": 2000,
+    "batch_size": 4096
+  },
+  "train_rows": 41135,
+  "train_minutes": 3.0,
+  "sample_minutes": {
+    "synth_scale_1": 0.7,
+    "synth_scale_2": 1.2
+  },
+  "filter": {
+    "synth_scale_1": {
+      "generated": 41135,
+      "kept": 41134,
+      "pass_rate": 1.0,
+      "rules_failed": {
+        "ap_hi <= ap_lo": 1
+      }
+    },
+    "synth_scale_2": {
+      "generated": 82270,
+      "kept": 82264,
+      "pass_rate": 0.9999,
+      "rules_failed": {
+        "ap_hi <= ap_lo": 6
+      }
+    }
+  },
+  "tstr_auc_quick": {
+    "synth_scale_1": 0.7979,
+    "synth_scale_2": 0.7993
+  },
+  "trtr_baseline_auc": 0.8014
+}

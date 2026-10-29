@@ -15,7 +15,7 @@
       "pass": true
     },
     "alpha_precision": {
-      "value": 0.9974,
+      "value": 0.9978,
       "target": ">= 0.90",
       "pass": true
     },
@@ -52,9 +52,9 @@
   },
   "fidelity": {
     "alpha_precision": {
-      "delta_precision_alpha_OC": 0.9974299106555253,
-      "delta_coverage_beta_OC": 0.5020171322522347,
-      "authenticity_OC": 0.4939340157059152,
+      "delta_precision_alpha_OC": 0.9977754843858856,
+      "delta_coverage_beta_OC": 0.498960232752263,
+      "authenticity_OC": 0.5050691692397462,
       "delta_precision_alpha_naive": 0.9930835510984388,
       "delta_coverage_beta_naive": 0.5095896849902344,
       "authenticity_naive": 0.4673603851109868
@@ -66,8 +66,8 @@
       "ks err": 0.0013135905762528587,
       "avg tvd": 0.0036857142857142857,
       "tvd err": 0.0009228394514005263,
-      "avg pval": 0.4555335927232433,
-      "pval err": 0.10781454074317301,
+      "avg pval": 0.4479578351474857,
+      "pval err": 0.10395284717598177,
       "num sigs": 0,
       "frac sigs": 0.0,
       "sigs cols": []
