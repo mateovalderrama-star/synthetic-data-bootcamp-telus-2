@@ -9,6 +9,7 @@ Privacy-safe synthetic patient data for cardiovascular risk prediction. We train
 | 01 | `01_data_prep_and_baseline.ipynb` | anywhere (CPU) | ~1 min | `data/cardio/` splits + metadata, `results/baseline_metrics.json` |
 | 02 | `02_train_tabddpm_and_generate.ipynb` | **AI Factory GPU** | smoke: minutes · full: **~15–30 min on an H200** | `runs/<mode>/` model + synthetic CSVs, `results/02_generation_summary_<mode>.json` |
 | 03 | `03_scorecard.ipynb` | AI Factory (GPU speeds up the distance metrics) | ~minutes | `results/03_scorecard_<mode>.json` (fidelity · utility · privacy · relationships), `runs/<mode>/models/risk_model_synthetic.json` |
+| 04 | `04_steps_ablation.py` | **AI Factory GPU** | ~30 min | re-runs 02 at 10k / 5k iterations + 03 on each → `results/04_steps_ablation.json` |
 
 All notebooks share `synthheart_common.py`: column order, cleaning/filter rules and paths.
 
