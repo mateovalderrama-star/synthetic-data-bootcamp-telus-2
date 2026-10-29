@@ -89,11 +89,14 @@ with compare:
                 st.bar_chart(df, stack=False, height=220)
 
 with scorecard:
-    path = sh.RESULTS_DIR / f"03_scorecard_{mode}.json"
+    # Prefer 03b (exact copies judged against holdout at equal size); fall back to plain 03.
+    path = next((p for p in (sh.RESULTS_DIR / f"03b_scorecard_{mode}.json", sh.RESULTS_DIR / f"03_scorecard_{mode}.json")
+                 if p.exists()), sh.RESULTS_DIR / f"03_scorecard_{mode}.json")
     if not path.exists():
         st.info(f"`{path.name}` not found. Run notebook 03 for this run.")
     else:
         card = json.loads(path.read_text())
+        st.caption(f"Source: `{path.name}`")
         util, priv = card["utility"], card["privacy"]
         tstr = util["tstr_auc"][card["scored"]]
         m1, m2, m3, m4 = st.columns(4)
@@ -101,8 +104,9 @@ with scorecard:
         m2.metric("Membership attack AUC", f"{priv['mia']['auc']:.3f}", "0.5 = coin flip", delta_color="off")
         m3.metric("DCR score", f"{priv['dcr']['dcr_score']:.3f}", f"ideal {priv['dcr']['ideal']:.2f}", delta_color="off")
         c = priv["exact_copies"]
+        same_size = c.get("train_sample_holdout_size_mean", c["train_sample_holdout_size"])
         m4.metric("Exact copies of train", c["train"],
-                  f"{c['train_sample_holdout_size']} vs {c['holdout']} same-size train / holdout", delta_color="off")
+                  f"{same_size:g} vs {c['holdout']} same-size train / holdout", delta_color="off")
         st.dataframe(pd.DataFrame([{"check": k, "status": "🟢 pass" if v["pass"] else "🔴 miss", "value": v["value"],
                                     "target": v["target"]} for k, v in card["acceptance"].items()]),
                      hide_index=True, width="stretch")
