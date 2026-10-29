@@ -1,0 +1,640 @@
+{
+  "run_mode": "iter5000",
+  "scored": "synth_scale_1",
+  "rows": {
+    "train": 41135,
+    "holdout": 13712,
+    "test": 13712,
+    "synth_scale_1": 41134,
+    "synth_scale_2": 82264
+  },
+  "acceptance": {
+    "rule_pass_rate": {
+      "value": 1.0,
+      "target": ">= 0.98",
+      "pass": true
+    },
+    "alpha_precision": {
+      "value": 0.9944,
+      "target": ">= 0.90",
+      "pass": true
+    },
+    "columns_differing": {
+      "value": 1.0,
+      "target": "<= 1",
+      "pass": true
+    },
+    "correlation_gap": {
+      "value": 0.1925,
+      "target": "<= 0.10",
+      "pass": false
+    },
+    "tstr_auc": {
+      "value": 0.7979,
+      "target": ">= 0.781",
+      "pass": true
+    },
+    "mia_auc": {
+      "value": 0.5058,
+      "target": "<= 0.55",
+      "pass": true
+    },
+    "dcr_score": {
+      "value": 0.7512,
+      "target": "0.75 +/- 0.02",
+      "pass": true
+    },
+    "exact_copies_of_train": {
+      "value": 323.0,
+      "target": "0",
+      "pass": false
+    }
+  },
+  "fidelity": {
+    "alpha_precision": {
+      "delta_precision_alpha_OC": 0.9943973411261987,
+      "delta_coverage_beta_OC": 0.49714753407562284,
+      "authenticity_OC": 0.5106724364272864,
+      "delta_precision_alpha_naive": 0.9965019848222434,
+      "delta_coverage_beta_naive": 0.5010242945819354,
+      "authenticity_naive": 0.4756892108717849
+    },
+    "ks_tvd": {
+      "avg stat": 0.005020204018967347,
+      "stat err": 0.0013549047697465517,
+      "avg ks": 0.008008489645521633,
+      "ks err": 0.002638475735375949,
+      "avg tvd": 0.0028857142857142857,
+      "tvd err": 0.0007950527300358227,
+      "avg pval": 0.47830479820456034,
+      "pval err": 0.1048566052246249,
+      "num sigs": 1,
+      "frac sigs": 0.08333333333333333,
+      "sigs cols": [
+        "ap_hi"
+      ]
+    },
+    "ci_overlap": {
+      "avg overlap": 0.3599006388859025,
+      "overlap err": 0.12915222784505365,
+      "num non-overlaps": 1.0,
+      "frac non-overlaps": 0.2
+    },
+    "correlation": {
+      "corr_mat_diff": 0.1924880628755901,
+      "corr_mat_dims": 12,
+      "largest_pair_gaps": {
+        "weight x ap_lo": 0.0776,
+        "height x ap_lo": 0.0635,
+        "weight x ap_hi": 0.0514,
+        "height x ap_hi": 0.0482,
+        "age x ap_lo": 0.0338
+      }
+    },
+    "cardio_rate": {
+      "real_train": 0.4948,
+      "synthetic": 0.4892
+    },
+    "correlation_matrices": {
+      "real": {
+        "gender": {
+          "gender": 1.0,
+          "cholesterol": 0.0014,
+          "gluc": 0.0007,
+          "smoke": 0.1178,
+          "alco": 0.0289,
+          "active": 0.0,
+          "cardio": 0.0,
+          "age": 0.0005,
+          "height": 0.277,
+          "weight": 0.0258,
+          "ap_hi": 0.0042,
+          "ap_lo": 0.0049
+        },
+        "cholesterol": {
+          "gender": 0.0014,
+          "cholesterol": 1.0,
+          "gluc": 0.1569,
+          "smoke": 0.0004,
+          "alco": 0.0018,
+          "active": 0.0001,
+          "cardio": 0.0476,
+          "age": 0.0249,
+          "height": 0.0034,
+          "weight": 0.0198,
+          "ap_hi": 0.0396,
+          "ap_lo": 0.0264
+        },
+        "gluc": {
+          "gender": 0.0007,
+          "cholesterol": 0.1569,
+          "gluc": 1.0,
+          "smoke": 0.0005,
+          "alco": 0.0012,
+          "active": 0.0001,
+          "cardio": 0.0078,
+          "age": 0.0102,
+          "height": 0.0004,
+          "weight": 0.0135,
+          "ap_hi": 0.0102,
+          "ap_lo": 0.0064
+        },
+        "smoke": {
+          "gender": 0.1178,
+          "cholesterol": 0.0004,
+          "gluc": 0.0005,
+          "smoke": 1.0,
+          "alco": 0.1171,
+          "active": 0.0005,
+          "cardio": 0.0003,
+          "age": 0.0018,
+          "height": 0.0388,
+          "weight": 0.0044,
+          "ap_hi": 0.0008,
+          "ap_lo": 0.0008
+        },
+        "alco": {
+          "gender": 0.0289,
+          "cholesterol": 0.0018,
+          "gluc": 0.0012,
+          "smoke": 0.1171,
+          "alco": 1.0,
+          "active": 0.0006,
+          "cardio": 0.0001,
+          "age": 0.0007,
+          "height": 0.0101,
+          "weight": 0.0047,
+          "ap_hi": 0.0011,
+          "ap_lo": 0.0013
+        },
+        "active": {
+          "gender": 0.0,
+          "cholesterol": 0.0001,
+          "gluc": 0.0001,
+          "smoke": 0.0005,
+          "alco": 0.0006,
+          "active": 1.0,
+          "cardio": 0.0014,
+          "age": 0.0001,
+          "height": 0.0002,
+          "weight": 0.0002,
+          "ap_hi": 0.0,
+          "ap_lo": 0.0
+        },
+        "cardio": {
+          "gender": 0.0,
+          "cholesterol": 0.0476,
+          "gluc": 0.0078,
+          "smoke": 0.0003,
+          "alco": 0.0001,
+          "active": 0.0014,
+          "cardio": 1.0,
+          "age": 0.0583,
+          "height": 0.0002,
+          "weight": 0.0327,
+          "ap_hi": 0.1822,
+          "ap_lo": 0.1135
+        },
+        "age": {
+          "gender": 0.0005,
+          "cholesterol": 0.0249,
+          "gluc": 0.0102,
+          "smoke": 0.0018,
+          "alco": 0.0007,
+          "active": 0.0001,
+          "cardio": 0.0583,
+          "age": 1.0,
+          "height": -0.0924,
+          "weight": 0.0527,
+          "ap_hi": 0.2085,
+          "ap_lo": 0.1562
+        },
+        "height": {
+          "gender": 0.277,
+          "cholesterol": 0.0034,
+          "gluc": 0.0004,
+          "smoke": 0.0388,
+          "alco": 0.0101,
+          "active": 0.0002,
+          "cardio": 0.0002,
+          "age": -0.0924,
+          "height": 1.0,
+          "weight": 0.3146,
+          "ap_hi": 0.0223,
+          "ap_lo": 0.0387
+        },
+        "weight": {
+          "gender": 0.0258,
+          "cholesterol": 0.0198,
+          "gluc": 0.0135,
+          "smoke": 0.0044,
+          "alco": 0.0047,
+          "active": 0.0002,
+          "cardio": 0.0327,
+          "age": 0.0527,
+          "height": 0.3146,
+          "weight": 1.0,
+          "ap_hi": 0.2737,
+          "ap_lo": 0.256
+        },
+        "ap_hi": {
+          "gender": 0.0042,
+          "cholesterol": 0.0396,
+          "gluc": 0.0102,
+          "smoke": 0.0008,
+          "alco": 0.0011,
+          "active": 0.0,
+          "cardio": 0.1822,
+          "age": 0.2085,
+          "height": 0.0223,
+          "weight": 0.2737,
+          "ap_hi": 1.0,
+          "ap_lo": 0.7338
+        },
+        "ap_lo": {
+          "gender": 0.0049,
+          "cholesterol": 0.0264,
+          "gluc": 0.0064,
+          "smoke": 0.0008,
+          "alco": 0.0013,
+          "active": 0.0,
+          "cardio": 0.1135,
+          "age": 0.1562,
+          "height": 0.0387,
+          "weight": 0.256,
+          "ap_hi": 0.7338,
+          "ap_lo": 1.0
+        }
+      },
+      "synthetic": {
+        "gender": {
+          "gender": 1.0,
+          "cholesterol": 0.0018,
+          "gluc": 0.0013,
+          "smoke": 0.1244,
+          "alco": 0.0339,
+          "active": 0.0001,
+          "cardio": 0.0,
+          "age": 0.0011,
+          "height": 0.2588,
+          "weight": 0.0186,
+          "ap_hi": 0.0036,
+          "ap_lo": 0.0055
+        },
+        "cholesterol": {
+          "gender": 0.0018,
+          "cholesterol": 1.0,
+          "gluc": 0.1539,
+          "smoke": 0.0007,
+          "alco": 0.0021,
+          "active": 0.0002,
+          "cardio": 0.0421,
+          "age": 0.0245,
+          "height": 0.0048,
+          "weight": 0.0148,
+          "ap_hi": 0.0374,
+          "ap_lo": 0.0246
+        },
+        "gluc": {
+          "gender": 0.0013,
+          "cholesterol": 0.1539,
+          "gluc": 1.0,
+          "smoke": 0.001,
+          "alco": 0.0011,
+          "active": 0.0,
+          "cardio": 0.0062,
+          "age": 0.0105,
+          "height": 0.0005,
+          "weight": 0.0125,
+          "ap_hi": 0.0116,
+          "ap_lo": 0.0075
+        },
+        "smoke": {
+          "gender": 0.1244,
+          "cholesterol": 0.0007,
+          "gluc": 0.001,
+          "smoke": 1.0,
+          "alco": 0.1265,
+          "active": 0.0008,
+          "cardio": 0.0007,
+          "age": 0.0023,
+          "height": 0.0373,
+          "weight": 0.0037,
+          "ap_hi": 0.0007,
+          "ap_lo": 0.0012
+        },
+        "alco": {
+          "gender": 0.0339,
+          "cholesterol": 0.0021,
+          "gluc": 0.0011,
+          "smoke": 0.1265,
+          "alco": 1.0,
+          "active": 0.0006,
+          "cardio": 0.0002,
+          "age": 0.0008,
+          "height": 0.0115,
+          "weight": 0.0044,
+          "ap_hi": 0.0014,
+          "ap_lo": 0.0016
+        },
+        "active": {
+          "gender": 0.0001,
+          "cholesterol": 0.0002,
+          "gluc": 0.0,
+          "smoke": 0.0008,
+          "alco": 0.0006,
+          "active": 1.0,
+          "cardio": 0.0004,
+          "age": 0.0001,
+          "height": 0.0013,
+          "weight": 0.0016,
+          "ap_hi": 0.0001,
+          "ap_lo": 0.0006
+        },
+        "cardio": {
+          "gender": 0.0,
+          "cholesterol": 0.0421,
+          "gluc": 0.0062,
+          "smoke": 0.0007,
+          "alco": 0.0002,
+          "active": 0.0004,
+          "cardio": 1.0,
+          "age": 0.0579,
+          "height": 0.0015,
+          "weight": 0.0227,
+          "ap_hi": 0.175,
+          "ap_lo": 0.1082
+        },
+        "age": {
+          "gender": 0.0011,
+          "cholesterol": 0.0245,
+          "gluc": 0.0105,
+          "smoke": 0.0023,
+          "alco": 0.0008,
+          "active": 0.0001,
+          "cardio": 0.0579,
+          "age": 1.0,
+          "height": -0.073,
+          "weight": 0.0686,
+          "ap_hi": 0.1884,
+          "ap_lo": 0.1225
+        },
+        "height": {
+          "gender": 0.2588,
+          "cholesterol": 0.0048,
+          "gluc": 0.0005,
+          "smoke": 0.0373,
+          "alco": 0.0115,
+          "active": 0.0013,
+          "cardio": 0.0015,
+          "age": -0.073,
+          "height": 1.0,
+          "weight": 0.337,
+          "ap_hi": -0.026,
+          "ap_lo": -0.0248
+        },
+        "weight": {
+          "gender": 0.0186,
+          "cholesterol": 0.0148,
+          "gluc": 0.0125,
+          "smoke": 0.0037,
+          "alco": 0.0044,
+          "active": 0.0016,
+          "cardio": 0.0227,
+          "age": 0.0686,
+          "height": 0.337,
+          "weight": 1.0,
+          "ap_hi": 0.2223,
+          "ap_lo": 0.1783
+        },
+        "ap_hi": {
+          "gender": 0.0036,
+          "cholesterol": 0.0374,
+          "gluc": 0.0116,
+          "smoke": 0.0007,
+          "alco": 0.0014,
+          "active": 0.0001,
+          "cardio": 0.175,
+          "age": 0.1884,
+          "height": -0.026,
+          "weight": 0.2223,
+          "ap_hi": 1.0,
+          "ap_lo": 0.7358
+        },
+        "ap_lo": {
+          "gender": 0.0055,
+          "cholesterol": 0.0246,
+          "gluc": 0.0075,
+          "smoke": 0.0012,
+          "alco": 0.0016,
+          "active": 0.0006,
+          "cardio": 0.1082,
+          "age": 0.1225,
+          "height": -0.0248,
+          "weight": 0.1783,
+          "ap_hi": 0.7358,
+          "ap_lo": 1.0
+        }
+      }
+    },
+    "mutual_information": {
+      "mutual_inf_diff": 0.019487903360113787,
+      "mi_mat_dims": 7
+    }
+  },
+  "utility": {
+    "trtr_auc": 0.8014,
+    "trtr_auc_refit": 0.8014,
+    "tstr_auc": {
+      "synth_scale_1": 0.7979,
+      "synth_scale_2": 0.7993
+    },
+    "tstr_accuracy": {
+      "synth_scale_1": 0.7356,
+      "synth_scale_2": 0.7342
+    },
+    "auc_gap": {
+      "synth_scale_1": 0.0035,
+      "synth_scale_2": 0.0021
+    },
+    "f1_difference": {
+      "random_forest_real_train_f1": 0.7893431147424455,
+      "random_forest_synthetic_train_f1": 0.7168308960654792,
+      "adaboost_real_train_f1": 0.7120442410149075,
+      "adaboost_synthetic_train_f1": 0.7110327721445021,
+      "svm_real_train_f1": 0.7285507734993679,
+      "svm_synthetic_train_f1": 0.7262427627049227,
+      "logreg_real_train_f1": 0.7235440912610923,
+      "logreg_synthetic_train_f1": 0.7233204782367986,
+      "mean_f1_difference": -0.019013827841527636,
+      "f1_difference_standard_error": 0.001330692995474089,
+      "random_forest_real_train_f1_holdout": 0.7285417778189041,
+      "random_forest_synthetic_train_f1_holdout": 0.7221401311762201,
+      "adaboost_real_train_f1_holdout": 0.722011342803538,
+      "adaboost_synthetic_train_f1_holdout": 0.7149517088206223,
+      "svm_real_train_f1_holdout": 0.7270651122231171,
+      "svm_synthetic_train_f1_holdout": 0.7264051612884441,
+      "logreg_real_train_f1_holdout": 0.7250140717352607,
+      "logreg_synthetic_train_f1_holdout": 0.724802229654375,
+      "mean_f1_difference_holdout": -0.003583268410289553,
+      "f1_difference_standard_error_holdout": 0.0018243874317429051
+    }
+  },
+  "privacy": {
+    "dcr": {
+      "dcr_score": 0.7511547803878784,
+      "ideal": 0.75
+    },
+    "median_dcr": {
+      "median_dcr_score": 0.993347109551417
+    },
+    "nndr": {
+      "mean_nndr": 0.7632968728512546,
+      "nndr_standard_error": 0.0010312924544509815,
+      "privacy_loss": -0.0154626033523374,
+      "privacy_loss_standard_error": 0.0014124935793697103
+    },
+    "hitting_rate": {
+      "train": 0.4570560350066853,
+      "holdout": 0.4288943990665111
+    },
+    "epsilon_identifiability": {
+      "epsilon_identifiability_risk": 0.49386167497265104,
+      "privacy_loss": -0.24388628302034782
+    },
+    "exact_copies": {
+      "train": 323,
+      "train_sample_holdout_size": 109,
+      "holdout": 123,
+      "synthetic_rows": 41134
+    },
+    "mia": {
+      "auc": 0.5058,
+      "tpr_at_10pct_fpr": 0.1049,
+      "accuracy": 0.5129,
+      "mean_dcr_members": 0.0558,
+      "mean_dcr_non_members": 0.0571,
+      "candidates_per_class": 13712
+    }
+  },
+  "relationships": {
+    "risk_curves": {
+      "systolic BP": {
+        "real": {
+          "<120": 0.229,
+          "120-139": 0.415,
+          ">=140": 0.837
+        },
+        "synthetic": {
+          "<120": 0.222,
+          "120-139": 0.417,
+          ">=140": 0.81
+        }
+      },
+      "age": {
+        "real": {
+          "<50": 0.362,
+          "50-59": 0.509,
+          ">=60": 0.671
+        },
+        "synthetic": {
+          "<50": 0.344,
+          "50-59": 0.515,
+          ">=60": 0.653
+        }
+      },
+      "cholesterol": {
+        "real": {
+          "above normal": 0.602,
+          "normal": 0.436,
+          "well above": 0.756
+        },
+        "synthetic": {
+          "above normal": 0.578,
+          "normal": 0.435,
+          "well above": 0.741
+        }
+      }
+    },
+    "bp_age_table": {
+      "real": {
+        "<50": {
+          "<120": 0.145,
+          "120-139": 0.298,
+          ">=140": 0.852
+        },
+        "50-59": {
+          "<120": 0.259,
+          "120-139": 0.422,
+          ">=140": 0.827
+        },
+        ">=60": {
+          "<120": 0.464,
+          "120-139": 0.589,
+          ">=140": 0.845
+        }
+      },
+      "synthetic": {
+        "<50": {
+          "<120": 0.145,
+          "120-139": 0.288,
+          ">=140": 0.788
+        },
+        "50-59": {
+          "<120": 0.27,
+          "120-139": 0.433,
+          ">=140": 0.809
+        },
+        ">=60": {
+          "<120": 0.353,
+          "120-139": 0.587,
+          ">=140": 0.832
+        }
+      },
+      "max_abs_diff": 0.111
+    },
+    "importance": {
+      "spearman": 0.972,
+      "top3_real": [
+        "ap_hi",
+        "age",
+        "cholesterol"
+      ],
+      "top3_synthetic": [
+        "ap_hi",
+        "age",
+        "cholesterol"
+      ],
+      "values": {
+        "real": {
+          "height": -0.0002,
+          "gender": 0.0001,
+          "alco": 0.0005,
+          "weight": 0.0006,
+          "smoke": 0.001,
+          "gluc": 0.0015,
+          "ap_lo": 0.0018,
+          "active": 0.0025,
+          "bmi": 0.0033,
+          "cholesterol": 0.0311,
+          "age": 0.0372,
+          "ap_hi": 0.1825
+        },
+        "synthetic": {
+          "height": -0.0004,
+          "gender": 0.0001,
+          "alco": 0.0005,
+          "weight": 0.0011,
+          "smoke": 0.0009,
+          "gluc": 0.0018,
+          "ap_lo": 0.0016,
+          "active": 0.0017,
+          "bmi": 0.0041,
+          "cholesterol": 0.0326,
+          "age": 0.0335,
+          "ap_hi": 0.1814
+        }
+      }
+    }
+  }
+}
