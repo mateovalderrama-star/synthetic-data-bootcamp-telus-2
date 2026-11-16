@@ -10,6 +10,8 @@ Privacy-safe synthetic patient data for cardiovascular risk prediction. We train
 | 02 | `02_train_tabddpm_and_generate.ipynb` | **AI Factory GPU** | smoke: minutes · full: **~15–30 min on an H200** | `runs/<mode>/` model + synthetic CSVs, `results/02_generation_summary_<mode>.json` |
 | 03 | `03_scorecard.ipynb` | AI Factory (GPU speeds up the distance metrics) | ~minutes | `results/03_scorecard_<mode>.json` (fidelity · utility · privacy · relationships), `runs/<mode>/models/risk_model_synthetic.json` |
 | 04 | `04_steps_ablation.py` | **AI Factory GPU** | ~30 min | re-runs 02 at 10k / 5k iterations + 03 on each → `results/04_steps_ablation.json` |
+| 05 | `05_nss_generate.py` | **AI Factory GPU**, NSS environment (`setup_nss.sh`) | not measured yet | NVIDIA NeMo Safe Synthesizer on the same train split → `runs/nss_*/`, `results/02_generation_summary_nss_*.json` |
+| 06 | `06_compare_generators.py` | **AI Factory GPU** | ~10 min + ~5 min per run | re-times TabDDPM, runs 03b on every run → `results/comparison/` (tables, figures, reports). Steps, design and method notes: [`NSS_COMPARISON.md`](NSS_COMPARISON.md) |
 | – | `dashboard/app.py` | anywhere (CPU) | – | Streamlit showcase: predict · compare · scorecard. From the repo root: `uv run --with streamlit streamlit run implementations/synthheart/dashboard/app.py` |
 
 All notebooks share `synthheart_common.py`: column order, cleaning/filter rules and paths.

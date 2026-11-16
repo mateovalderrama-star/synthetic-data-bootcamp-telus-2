@@ -6,3 +6,5 @@ logs/
 data/cardio/*.csv
 # Written by SynthEval (via midst-toolkit) when notebook 03 runs
 SE_analysis_config.json
+# NeMo Safe Synthesizer environment, built by setup_nss.sh
+.venv-nss/
