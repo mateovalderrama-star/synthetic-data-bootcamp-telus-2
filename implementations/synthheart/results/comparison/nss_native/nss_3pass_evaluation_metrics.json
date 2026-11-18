@@ -1,0 +1,32 @@
+{
+  "synthetic_data_quality_score": 9.4,
+  "column_correlation_stability_score": 9.5,
+  "deep_structure_stability_score": 9.1,
+  "column_distribution_stability_score": 9.6,
+  "text_semantic_similarity_score": null,
+  "text_structure_similarity_score": null,
+  "autocorrelation_similarity_score": null,
+  "data_privacy_score": 9.4,
+  "membership_inference_protection_score": 10.0,
+  "attribute_inference_protection_score": 8.8,
+  "num_valid_records": 82394,
+  "num_invalid_records": 93,
+  "num_prompts": 6345,
+  "valid_record_fraction": 0.9988725496138785,
+  "num_completion_tokens": 5412285,
+  "num_valid_record_tokens": 5026037,
+  "num_invalid_record_tokens": 5661,
+  "num_non_record_tokens": 380587,
+  "valid_record_token_fraction": 0.9286349480856976,
+  "tokens_per_prompt": 853.0,
+  "tokens_per_second": 11583.28108947394,
+  "valid_tokens_per_second": 10756.639633185674,
+  "tokenization_overhead_sec": 9.214310627430677,
+  "timing": {
+    "total_time_sec": 3358.7762493751943,
+    "pii_replacer_time_sec": null,
+    "training_time_sec": 2771.0892689190805,
+    "generation_time_sec": 467.2497333176434,
+    "evaluation_time_sec": 6.703341320157051
+  }
+}

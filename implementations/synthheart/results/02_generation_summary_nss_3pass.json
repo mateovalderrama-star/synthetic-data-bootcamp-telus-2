@@ -1,0 +1,82 @@
+{
+  "run_mode": "nss_3pass",
+  "generator": "nemo-safe-synthesizer",
+  "nss_version": "0.1.17",
+  "nss_overrides": {
+    "replace_pii": null,
+    "data": {
+      "random_state": 42
+    },
+    "generation": {
+      "num_records": 82270
+    },
+    "training": {
+      "num_input_records_to_sample": 123405
+    }
+  },
+  "train_rows": 41135,
+  "train_rows_seen": 39135,
+  "stage_minutes": {
+    "process_data": 0.03,
+    "train": 46.47,
+    "generate": 9.36,
+    "evaluate": 0.14,
+    "save_results": 0.0
+  },
+  "train_minutes": 46.47,
+  "sample_minutes": {
+    "synth_scale_2": 9.36
+  },
+  "generated_rows_per_second": 146.5,
+  "adapter_mb": 61.4,
+  "filter": {
+    "synth_scale_1": {
+      "generated": 41135,
+      "kept": 41134,
+      "pass_rate": 1.0,
+      "rules_failed": {
+        "ap_hi <= ap_lo": 1
+      }
+    },
+    "synth_scale_2": {
+      "generated": 82270,
+      "kept": 82267,
+      "pass_rate": 1.0,
+      "rules_failed": {
+        "ap_hi <= ap_lo": 3
+      }
+    }
+  },
+  "nss_summary": {
+    "synthetic_data_quality_score": 9.4,
+    "column_correlation_stability_score": 9.5,
+    "deep_structure_stability_score": 9.1,
+    "column_distribution_stability_score": 9.6,
+    "text_semantic_similarity_score": null,
+    "text_structure_similarity_score": null,
+    "autocorrelation_similarity_score": null,
+    "data_privacy_score": 9.4,
+    "membership_inference_protection_score": 10.0,
+    "attribute_inference_protection_score": 8.8,
+    "num_valid_records": 82394,
+    "num_invalid_records": 93,
+    "num_prompts": 6345,
+    "valid_record_fraction": 0.9988725496138785,
+    "num_completion_tokens": 5412285,
+    "num_valid_record_tokens": 5026037,
+    "num_invalid_record_tokens": 5661,
+    "num_non_record_tokens": 380587,
+    "valid_record_token_fraction": 0.9286349480856976,
+    "tokens_per_prompt": 853.0,
+    "tokens_per_second": 11583.28108947394,
+    "valid_tokens_per_second": 10756.639633185674,
+    "tokenization_overhead_sec": 9.214310627430677,
+    "timing": {
+      "total_time_sec": 3358.7762493751943,
+      "pii_replacer_time_sec": null,
+      "training_time_sec": 2771.0892689190805,
+      "generation_time_sec": 467.2497333176434,
+      "evaluation_time_sec": 6.703341320157051
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+    "data": {
+        "group_training_examples_by": null,
+        "order_training_examples_by": null,
+        "max_sequences_per_example": 10,
+        "holdout": 0.05,
+        "max_holdout": 2000,
+        "random_state": 42
+    },
+    "evaluation": {
+        "mia_enabled": true,
+        "mia_excluded_columns": null,
+        "aia_enabled": true,
+        "sqs_report_columns": 250,
+        "sqs_report_rows": 5000,
+        "mandatory_columns": null,
+        "enabled": true,
+        "quasi_identifier_count": 3,
+        "pii_replay_enabled": true,
+        "pii_replay_entities": null,
+        "pii_replay_columns": null,
+        "time_series": {
+            "enabled": null,
+            "autocorrelation": {
+                "value_columns": null,
+                "max_lag": 20,
+                "min_points": 4,
+                "max_groups": 128
+            }
+        }
+    },
+    "training": {
+        "num_input_records_to_sample": 25000,
+        "batch_size": 1,
+        "gradient_accumulation_steps": 8,
+        "weight_decay": 0.01,
+        "warmup_steps": 0.05,
+        "lr_scheduler": "cosine",
+        "learning_rate": 0.0005,
+        "lora_r": 32,
+        "lora_alpha_over_r": 1.0,
+        "lora_target_modules": [
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "o_proj"
+        ],
+        "rope_scaling_factor": 1,
+        "validation_ratio": 0.0,
+        "validation_steps": 15,
+        "pretrained_model": "HuggingFaceTB/SmolLM3-3B",
+        "quantize_model": false,
+        "quantization_bits": 8,
+        "quantization_scheme": null,
+        "peft_implementation": "QLORA",
+        "max_vram_fraction": 0.8,
+        "attn_implementation": "sdpa"
+    },
+    "generation": {
+        "num_records": 82270,
+        "temperature": 0.9,
+        "repetition_penalty": 1.0,
+        "top_p": 1.0,
+        "patience": 3,
+        "invalid_fraction_threshold": 0.8,
+        "max_tokens_multiplier": 1.2,
+        "structured_generation": {
+            "enabled": false,
+            "backend": "auto",
+            "schema_method": "auto",
+            "use_single_sequence": false,
+            "max_records_per_sequence": null
+        },
+        "enforce_timeseries_fidelity": false,
+        "validation": {
+            "group_by_accept_no_delineator": false,
+            "group_by_ignore_invalid_records": false,
+            "group_by_fix_non_unique_value": false,
+            "group_by_fix_unordered_records": false,
+            "enforce_numeric_range": true
+        },
+        "attention_backend": "auto"
+    },
+    "privacy": {
+        "dp_enabled": false,
+        "epsilon": 8.0,
+        "delta": "auto",
+        "per_sample_max_grad_norm": 1.0
+    },
+    "time_series": {
+        "is_timeseries": false,
+        "timestamp_column": null,
+        "timestamp_interval_seconds": null,
+        "timestamp_format": null,
+        "start_timestamp": null,
+        "stop_timestamp": null
+    },
+    "replace_pii": null,
+    "preflight": {
+        "disabled_checks": []
+    },
+    "emit_telemetry": false,
+    "unknown_fields": "reject"
+}
